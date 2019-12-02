@@ -3,7 +3,7 @@ extends KinematicBody2D
 const UP = Vector2(0,-1)
 const GRAVITY = 20
 const ACCELERATION = 50
-var max_speed = 400
+var max_speed = 700
 var jump_height = -900
 var health
 export (float) var max_health
@@ -17,7 +17,7 @@ var motion = Vector2()
 func _process(delta):
 	if not is_on_floor():
 		jumpRemember += delta
-		if jumpRemember > 0.1:
+		if jumpRemember > 0.2:
 			validJump = false
 	else:
 		if jumpRemembered != null:
