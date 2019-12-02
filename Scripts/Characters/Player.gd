@@ -3,8 +3,8 @@ extends KinematicBody2D
 const UP = Vector2(0,-1)
 const GRAVITY = 20
 const ACCELERATION = 50
-var max_speed = 700
-var jump_height = -900
+var max_speed = 500
+var jump_height = -800
 var health
 export (float) var max_health
 
@@ -14,6 +14,20 @@ var validJump = true
 
 var motion = Vector2()
 
+func _ready():
+	set_camera_limits()
+
+func set_camera_limits():
+	if get_parent() != null:
+		var usedRect = get_parent().get_node("Walls").get_used_rect()
+		usedRect.position *= Vector2(64, 64)
+		usedRect.size *= Vector2(64, 64)
+		print(usedRect)
+		$Camera2D.limit_left = usedRect.position.x
+		$Camera2D.limit_right = usedRect.position.x + usedRect.size.x
+		$Camera2D.limit_top = usedRect.position.y
+		$Camera2D.limit_bottom = usedRect.position.y + usedRect.size.y
+
 func _process(delta):
 	if not is_on_floor():
 		jumpRemember += delta
@@ -21,7 +35,7 @@ func _process(delta):
 			validJump = false
 	else:
 		if jumpRemembered != null:
-			if jumpRemember - jumpRemembered < 0.2 && jumpRemember - jumpRemembered > 0:
+			if jumpRemember - jumpRemembered < 0.1 && jumpRemember - jumpRemembered > 0:
 				motion.y = jump_height
 		jumpRemember = 0
 		validJump = true
