@@ -4,7 +4,7 @@ const UP = Vector2(0,-1)
 const GRAVITY = 30
 const ACCELERATION = 50
 var max_speed = 500
-var jump_height = -1000
+var jump_height = -1200
 var health
 export (float) var max_health
 export (Vector2) var specializedZoom
