@@ -7,6 +7,7 @@ var max_speed = 500
 var jump_height = -1000
 var health
 export (float) var max_health
+export (Vector2) var specializedZoom
 
 var jumpRemember = 0
 var jumpRemembered
@@ -15,6 +16,8 @@ var validJump = true
 var motion = Vector2()
 
 func _ready():
+	if specializedZoom != Vector2(0, 0):
+		$Camera2D.zoom = specializedZoom
 	set_camera_limits()
 
 func set_camera_limits():
@@ -44,11 +47,15 @@ func _physics_process(delta):
 	var friction = false
 	
 	if Input.is_action_pressed("ui_right"):
+		if motion.x < 0:
+			motion.x = lerp(motion.x, 0, 0.5)
 		motion.x = min(motion.x+ACCELERATION, max_speed)
 
 		
 		
 	elif Input.is_action_pressed("ui_left"):
+		if motion.x > 0:
+			lerp(motion.x, 0, 0.5)
 		motion.x = max(motion.x-ACCELERATION, -max_speed)
 	else:
 		friction = true
@@ -57,12 +64,14 @@ func _physics_process(delta):
 	if is_on_floor():
 		if Input.is_action_just_pressed("ui_up"):
 			motion.y = jump_height
+			validJump = false
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.3)
 	else:
 		if Input.is_action_just_pressed("ui_up"):
 			if validJump:
 				motion.y = jump_height
+				validJump = false
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.05)
 		if not Input.is_action_pressed("ui_up"):
