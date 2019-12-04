@@ -19,6 +19,7 @@ func _ready():
 	if specializedZoom != Vector2(0, 0):
 		$Camera2D.zoom = specializedZoom
 	set_camera_limits()
+	$CanvasLayer/Transition/AnimationPlayer.play("fadein")
 
 func set_camera_limits():
 	if get_parent() != null:
