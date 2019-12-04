@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UnnamedMetroidvania/Scripts/Characters/Player.gd" type="Script" id=1]
 [ext_resource path="res://UnnamedMetroidvania/Sprites/Characters/Player/TA/Metroidvania Character-1.png.png" type="Texture" id=2]
@@ -6,6 +6,37 @@
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 31.6069
 height = 65.1118
+
+[sub_resource type="Animation" id=2]
+resource_name = "fadein"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -20,3 +51,14 @@ shape = SubResource( 1 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 1.5, 1.5 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Transition" type="ColorRect" parent="CanvasLayer"]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Transition"]
+anims/fadein = SubResource( 2 )
+anims/fadeout = SubResource( 3 )
