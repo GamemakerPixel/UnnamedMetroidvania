@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UnnamedMetroidvania/Scenes/OtherScenes/FakeWall.gd" type="Script" id=1]
+[ext_resource path="res://UnnamedMetroidvania/Resources/Tilesets/Birthplace/Birthplace.tres" type="TileSet" id=2]
+[ext_resource path="res://UnnamedMetroidvania/Resources/Tilesets/Birthplace/BirthplaceDetails.tres" type="TileSet" id=3]
+
+[node name="FakeWall" type="Area2D" groups=[
+"fakeWall",
+]]
+script = ExtResource( 1 )
+
+[node name="left" type="TileMap" parent="." groups=[
+"fakeWall",
+]]
+visible = false
+modulate = Color( 0.964706, 0.964706, 0.964706, 1 )
+position = Vector2( 2, 0 )
+tile_set = ExtResource( 2 )
+format = 1
+tile_data = PoolIntArray( 0, 3, 0, 1, 4, 0, 2, 4, 0, 3, 4, 0, 4, 4, 0, 5, 4, 0, 6, 4, 0, 7, 4, 0, 8, 4, 0, 65536, 3, 0, 65537, 4, 0, 65538, 4, 0, 65539, 4, 0, 65540, 4, 0, 65541, 4, 0, 65542, 4, 0, 65543, 4, 0, 65544, 4, 0, 131072, 3, 0, 131073, 4, 0, 131074, 4, 0, 131075, 4, 0, 131076, 4, 0, 131077, 4, 0, 131078, 4, 0, 131079, 4, 0, 131080, 4, 0 )
+
+[node name="details" type="TileMap" parent="left"]
+tile_set = ExtResource( 3 )
+format = 1
+tile_data = PoolIntArray( 65535, 6, 0, 131071, 6, 0, 196607, 6, 0 )
+
+[node name="right" type="TileMap" parent="." groups=[
+"fakeWall",
+]]
+visible = false
+modulate = Color( 0.964706, 0.964706, 0.964706, 1 )
+position = Vector2( -2, 0 )
+tile_set = ExtResource( 2 )
+format = 1
+tile_data = PoolIntArray( 65528, 4, 0, 65529, 4, 0, 65530, 4, 0, 65531, 4, 0, 65532, 4, 0, 65533, 4, 0, 65534, 4, 0, 65535, 4, 0, 0, 5, 0, 131064, 4, 0, 131065, 4, 0, 131066, 4, 0, 131067, 4, 0, 131068, 4, 0, 131069, 4, 0, 131070, 4, 0, 131071, 4, 0, 65536, 5, 0, 196600, 4, 0, 196601, 4, 0, 196602, 4, 0, 196603, 4, 0, 196604, 4, 0, 196605, 4, 0, 196606, 4, 0, 196607, 4, 0, 131072, 5, 0 )
+
+[node name="details" type="TileMap" parent="right"]
+position = Vector2( 4, 0 )
+tile_set = ExtResource( 3 )
+format = 1
+tile_data = PoolIntArray( 1, 5, 0, 65537, 5, 0, 131073, 5, 0 )
+
+[node name="down" type="TileMap" parent="." groups=[
+"fakeWall",
+]]
+visible = false
+modulate = Color( 0.964706, 0.964706, 0.964706, 1 )
+position = Vector2( 0, -2 )
+tile_set = ExtResource( 2 )
+format = 1
+tile_data = PoolIntArray( -524288, 4, 0, -524287, 4, 0, -524286, 4, 0, -458752, 4, 0, -458751, 4, 0, -458750, 4, 0, -393216, 4, 0, -393215, 4, 0, -393214, 4, 0, -327680, 4, 0, -327679, 4, 0, -327678, 4, 0, -262144, 4, 0, -262143, 4, 0, -262142, 4, 0, -196608, 4, 0, -196607, 4, 0, -196606, 4, 0, -131072, 4, 0, -131071, 4, 0, -131070, 4, 0, -65536, 4, 0, -65535, 4, 0, -65534, 4, 0, 0, 7, 0, 1, 7, 0, 2, 7, 0 )
+
+[node name="details" type="TileMap" parent="down"]
+position = Vector2( 2, 2 )
+tile_set = ExtResource( 3 )
+format = 1
+tile_data = PoolIntArray( 65536, 7, 0, 65537, 7, 0, 65538, 7, 0 )
+
+[node name="up" type="TileMap" parent="." groups=[
+"fakeWall",
+]]
+visible = false
+modulate = Color( 0.964706, 0.964706, 0.964706, 1 )
+position = Vector2( 0, 2 )
+tile_set = ExtResource( 2 )
+format = 1
+tile_data = PoolIntArray( 0, 1, 0, 1, 1, 0, 2, 1, 0, 65536, 4, 0, 65537, 4, 0, 65538, 4, 0, 131072, 4, 0, 131073, 4, 0, 131074, 4, 0, 196608, 4, 0, 196609, 4, 0, 196610, 4, 0, 262144, 4, 0, 262145, 4, 0, 262146, 4, 0, 327680, 4, 0, 327681, 4, 0, 327682, 4, 0, 393216, 4, 0, 393217, 4, 0, 393218, 4, 0, 458752, 4, 0, 458753, 4, 0, 458754, 4, 0, 524288, 4, 0, 524289, 4, 0, 524290, 4, 0 )
+
+[node name="details" type="TileMap" parent="up"]
+position = Vector2( 2, -2 )
+tile_set = ExtResource( 3 )
+format = 1
+tile_data = PoolIntArray( -65536, 4, 0, -65535, 4, 0, -65534, 4, 0 )
