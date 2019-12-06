@@ -102,3 +102,10 @@ func _physics_process(delta):
 	
 	motion = move_and_slide(motion, UP)
 	pass
+
+func printDialouge(line):
+	print(line)
+
+func unlockAbility(ability):
+	print("ULOCKED - " + str(ability))
+	GlobalVariables.abilities[ability] = true
