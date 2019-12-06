@@ -43,6 +43,23 @@ func _process(delta):
 				motion.y = jump_height
 		jumpRemember = 0
 		validJump = true
+	
+	checkAbilityInput()
+
+func checkAbilityInput():
+	if Input.is_action_pressed("ui_spell_screech"):
+		if GlobalVariables.abilities[0]:
+			pass
+	if Input.is_action_just_pressed("ui_spell_reveal"):
+		if GlobalVariables.abilities[1]:
+			print("reveal")
+			if $Ranges/Reveal.colliding_bodies != null:
+				print("is_colliding")
+				for body in $Ranges/Reveal.colliding_bodies:
+					print(body)
+					if body.is_in_group("fakeWall"):
+						print("Destroyed")
+						body.get_parent().destroy()
 
 func _physics_process(delta):
 	var friction = false
