@@ -6,7 +6,7 @@ var currentDialogLine = 0
 var dialog
 var speaker
 
-func _setDialog(dialog_, speaker_ = "???"):
+func setDialog(dialog_, speaker_ = "???"):
 	dialog = dialog_
 	speaker = speaker_
 	runningDialog = true
