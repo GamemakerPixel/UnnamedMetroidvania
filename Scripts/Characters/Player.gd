@@ -14,6 +14,10 @@ var jumpRemembered
 var validJump = true
 
 var motion = Vector2()
+var motionAllowed = true
+var dialogRunning = false
+var dialogToPrint
+var dialogSize
 
 func _ready():
 	if specializedZoom != Vector2(0, 0):
@@ -33,6 +37,8 @@ func set_camera_limits():
 		$Camera2D.limit_bottom = usedRect.position.y + usedRect.size.y
 
 func _process(delta):
+	if dialogRunning:
+		motionAllowed = false
 	if not is_on_floor():
 		jumpRemember += delta
 		if jumpRemember > 0.2:
@@ -52,60 +58,60 @@ func checkAbilityInput():
 			pass
 	if Input.is_action_just_pressed("ui_spell_reveal"):
 		if GlobalVariables.abilities[1]:
-			print("reveal")
 			if $Ranges/Reveal.colliding_bodies != null:
-				print("is_colliding")
 				for body in $Ranges/Reveal.colliding_bodies:
 					print(body)
 					if body.is_in_group("fakeWall"):
-						print("Destroyed")
 						body.get_parent().destroy()
 
 func _physics_process(delta):
-	var friction = false
-	
-	if Input.is_action_pressed("ui_right"):
-		if motion.x < 0:
-			motion.x = lerp(motion.x, 0, 0.5)
-		motion.x = min(motion.x+ACCELERATION, max_speed)
-
+	if motionAllowed:
+		var friction = false
 		
-		
-	elif Input.is_action_pressed("ui_left"):
-		if motion.x > 0:
-			lerp(motion.x, 0, 0.5)
-		motion.x = max(motion.x-ACCELERATION, -max_speed)
-	else:
-		friction = true
-		motion.x = lerp(motion.x, 0, 0.3)
+		if Input.is_action_pressed("ui_right"):
+			if motion.x < 0:
+				motion.x = lerp(motion.x, 0, 0.5)
+			motion.x = min(motion.x+ACCELERATION, max_speed)
 	
-	if is_on_floor():
-		if Input.is_action_just_pressed("ui_up"):
-			motion.y = jump_height
-			validJump = false
-		if friction == true:
+			
+			
+		elif Input.is_action_pressed("ui_left"):
+			if motion.x > 0:
+				lerp(motion.x, 0, 0.5)
+			motion.x = max(motion.x-ACCELERATION, -max_speed)
+		else:
+			friction = true
 			motion.x = lerp(motion.x, 0, 0.3)
-	else:
-		if Input.is_action_just_pressed("ui_up"):
-			if validJump:
+		
+		if is_on_floor():
+			if Input.is_action_just_pressed("ui_up"):
 				motion.y = jump_height
 				validJump = false
-		if friction == true:
-			motion.x = lerp(motion.x, 0, 0.05)
-		if not Input.is_action_pressed("ui_up"):
-			if motion.y < 0:
-				motion.y *= 0.5
-	if Input.is_action_just_pressed("ui_up"):
-		jumpRemembered = jumpRemember
-	motion.y += GRAVITY
-	
-	
-	motion = move_and_slide(motion, UP)
-	pass
+			if friction == true:
+				motion.x = lerp(motion.x, 0, 0.3)
+		else:
+			if Input.is_action_just_pressed("ui_up"):
+				if validJump:
+					motion.y = jump_height
+					validJump = false
+			if friction == true:
+				motion.x = lerp(motion.x, 0, 0.05)
+			if not Input.is_action_pressed("ui_up"):
+				if motion.y < 0:
+					motion.y *= 0.5
+		if Input.is_action_just_pressed("ui_up"):
+			jumpRemembered = jumpRemember
+		motion.y += GRAVITY
+		
+		
+		motion = move_and_slide(motion, UP)
+		pass
 
-func printDialouge(line):
-	print(line)
+func printDialog(dialog):
+	dialogRunning = true
+	dialogToPrint = dialog
+	dialogSize = dialog.size()
 
 func unlockAbility(ability):
-	print("ULOCKED - " + str(ability))
+	print("UNLOCKED - " + str(ability))
 	GlobalVariables.abilities[ability] = true
