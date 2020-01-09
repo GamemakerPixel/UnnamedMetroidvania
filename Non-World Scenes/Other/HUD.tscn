@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://UnnamedMetroidvania/Non-World Scenes/Other/HUD.gd" type="Script" id=1]
+[ext_resource path="res://UnnamedMetroidvania/Sprites/HUD/DialougeBox.png" type="Texture" id=2]
+[ext_resource path="res://UnnamedMetroidvania/Resources/Fonts/DialougeSpeakerFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://UnnamedMetroidvania/Resources/Fonts/DialougeFont.tres" type="DynamicFont" id=4]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="DialogBox" type="Sprite" parent="."]
+position = Vector2( 512, 200 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+
+[node name="Descale" type="Node2D" parent="DialogBox"]
+scale = Vector2( 0.25, 0.25 )
+
+[node name="Speaker" type="Label" parent="DialogBox/Descale"]
+margin_left = -272.0
+margin_top = -140.0
+margin_right = 272.0
+margin_bottom = -103.0
+custom_fonts/font = ExtResource( 3 )
+text = "Speaker"
+align = 1
+
+[node name="Dialouge" type="Label" parent="DialogBox/Descale"]
+margin_left = -272.0
+margin_top = -88.0
+margin_right = 272.0
+margin_bottom = 144.0
+custom_fonts/font = ExtResource( 4 )
+text = "HELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLONOURSUPOSEDTOWRAP"
+autowrap = true
