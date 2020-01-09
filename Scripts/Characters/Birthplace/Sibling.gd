@@ -1,15 +1,20 @@
 extends StaticBody2D
 
 export (int) var abilityToGrant
-export (PoolStringArray) var dialouge
+export (PoolStringArray) var dialog
+var runningDialog = false
+var onLine = 0
 
-func _on_DialougeQue_body_entered(body):
+func _process(delta):
+	if runningDialog:
+		if Input.is_action_just_pressed("ui_accept"):
+			onLine += 1
+			runDialog()
+
+func _on_dialogQue_body_entered(body):
 	if body.name == "Player":
-		runDialouge()
+		runDialog()
 
-func runDialouge():
-	var lines = dialouge.size()
-	var line = 1
-	for line in dialouge:
-		get_parent().get_node("Player").printDialouge(line)
+func runDialog():
+	get_parent().get_node("Player").printDialog(dialog)
 	get_parent().get_node("Player").unlockAbility(abilityToGrant)
