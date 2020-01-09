@@ -29,8 +29,8 @@ scale = Vector2( 6, 6 )
 frames = SubResource( 1 )
 animation = "Watch"
 
-[node name="DialougeQue" type="Area2D" parent="."]
+[node name="DialogQue" type="Area2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DialougeQue"]
-polygon = PoolVector2Array( -96, 96, 96, 96, 96, -224, -96, -224, -96, 96 )
-[connection signal="body_entered" from="DialougeQue" to="." method="_on_DialougeQue_body_entered"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DialogQue"]
+polygon = PoolVector2Array( -96, 96, 352, 96, 352, -224, -352, -224, -352, 96 )
+[connection signal="body_entered" from="DialogQue" to="." method="_on_dialogQue_body_entered"]
