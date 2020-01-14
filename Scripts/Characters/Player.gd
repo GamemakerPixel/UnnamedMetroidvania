@@ -37,8 +37,10 @@ func set_camera_limits():
 		$Camera2D.limit_bottom = usedRect.position.y + usedRect.size.y
 
 func _process(delta):
-	if dialogRunning:
+	if $HUD.dialogRunning:
 		motionAllowed = false
+	else:
+		motionAllowed = true
 	if not is_on_floor():
 		jumpRemember += delta
 		if jumpRemember > 0.2:
@@ -107,10 +109,8 @@ func _physics_process(delta):
 		motion = move_and_slide(motion, UP)
 		pass
 
-func printDialog(dialog):
-	dialogRunning = true
-	dialogToPrint = dialog
-	dialogSize = dialog.size()
+func printDialog(dialog, speaker = null):
+	$HUD.setDialog(dialog, speaker)
 
 func unlockAbility(ability):
 	print("UNLOCKED - " + str(ability))
